@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>सूर्यपुरा ग्राम विकास पोर्टल</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #E8611A;
+    --deep-green: #1A5C2A;
+    --gold: #F5A623;
+    --earth: #8B5E3C;
+    --cream: #FDF8F0;
+    --dark: #1A1A1A;
+    --light-green: #E8F5E9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 5%;
+    background: var(--deep-green);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo .emblem {
+    width: 42px;
+    height: 42px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .nav-logo span {
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+  .nav-logo small { color: var(--gold); font-size: 11px; font-weight: 400; display: block; }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-btn {
+    background: var(--saffron);
+    color: white !important;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-weight: 600 !important;
+  }
+
+  /* ─── HERO BANNER ─── */
+  .hero {
+    min-height: 92vh;
+    background:
+      linear-gradient(135deg, rgba(26,92,42,0.88) 0%, rgba(26,26,26,0.75) 60%, rgba(232,97,26,0.55) 100%),
+      url('https://images.unsplash.com/photo-1531219572328-a0171b4448a3?w=1400&q=80') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 6% 80px;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to top, var(--cream), transparent);
+  }
+  .hero-tag {
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 18px;
+    max-width: 680px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    color: rgba(255,255,255,0.88);
+    font-size: clamp(14px, 2vw, 17px);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--saffron);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 18px rgba(232,97,26,0.45);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,97,26,0.5); }
+  .btn-outline {
+    border: 2px solid white;
+    color: white;
+    padding: 11px 26px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+  /* hero stats */
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: left; }
+  .stat .num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat .label { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 3px; }
+
+  /* ─── SECTION TITLE ─── */
+  .section { padding: 70px 6%; }
+  .section-header { text-align: center; margin-bottom: 50px; }
+  .section-header .eyebrow {
+    color: var(--saffron);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: var(--dark);
+    line-height: 1.3;
+  }
+  .section-header .underline {
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    border-radius: 2px;
+    margin: 14px auto 0;
+  }
+
+  /* ─── DEVELOPMENT CARDS ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.07);
+    border-top: 4px solid transparent;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 10px 32px rgba(0,0,0,0.12); }
+  .card.green { border-top-color: var(--deep-green); }
+  .card.orange { border-top-color: var(--saffron); }
+  .card.gold { border-top-color: var(--gold); }
+  .card.earth { border-top-color: var(--earth); }
+  .card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .card h3 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .card p { font-size: 13px; color: #666; line-height: 1.65; }
+  .card-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--light-green);
+    color: var(--deep-green);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* ─── LEADER SECTION ─── */
+  .leader-section {
+    background: linear-gradient(135deg, var(--deep-green) 0%, #0d3b1a 100%);
+    padding: 70px 6%;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .leader-img-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .leader-avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--saffron));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    box-shadow: 0 0 0 12px rgba(245,166,35,0.2);
+  }
+  .leader-content h2 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    color: var(--gold);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom: 6px;
+  }
+  .leader-content .designation {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .leader-content blockquote {
+    color: rgba(255,255,255,0.9);
+    font-size: clamp(14px, 2vw, 17px);
+    line-height: 1.8;
+    font-style: italic;
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+    margin-bottom: 28px;
+    font-family: 'Tiro Devanagari Hindi', serif;
+  }
+  .leader-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+
+  /* ─── SCHEMES TICKER ─── */
+  .ticker-wrap {
+    background: var(--saffron);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-inner span {
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 40px;
+  }
+  .ticker-inner span::before { content: '🌾 '; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── PROGRESS BARS ─── */
+  .progress-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 0 6% 60px;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.07);
+  }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .progress-header span:first-child { font-weight: 600; font-size: 14px; }
+  .progress-header span:last-child { color: var(--saffron); font-weight: 700; font-size: 14px; }
+  .progress-bar {
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--deep-green), var(--gold));
+    transition: width 1.2s ease;
+  }
+
+  /* ─── SOCIAL POSTS ─── */
+  .social-section {
+    background: var(--light-green);
+    padding: 70px 6%;
+  }
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-top: 10px;
+  }
+  .social-post {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.13);
+  }
+
+  /* Post 1 - Kisan Samman */
+  .post-1 {
+    background: linear-gradient(160deg, #1A5C2A 0%, #0d3b1a 100%);
+    padding: 32px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .post-1::before {
+    content: '🌾';
+    position: absolute;
+    right: 20px; top: 20px;
+    font-size: 80px;
+    opacity: 0.12;
+  }
+  .post-handle { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 1px; margin-bottom: 18px; }
+  .post-1 h3 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    color: white;
+    font-size: 1.7rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .post-1 p { color: rgba(255,255,255,0.8); font-size: 13px; line-height: 1.7; }
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .post-footer .date { color: rgba(255,255,255,0.5); font-size: 11px; }
+  .post-footer .hashtags { color: var(--gold); font-size: 11px; font-weight: 600; }
+
+  /* Post 2 - Digital Pahchan */
+  .post-2 {
+    background: linear-gradient(160deg, #E8611A 0%, #c44a10 100%);
+    padding: 32px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .post-2::before {
+    content: '📱';
+    position: absolute;
+    right: 20px; top: 20px;
+    font-size: 80px;
+    opacity: 0.15;
+  }
+  .post-2 h3 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    color: white;
+    font-size: 1.7rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .post-2 p { color: rgba(255,255,255,0.85); font-size: 13px; line-height: 1.7; }
+  .post-stat-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .post-stat {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .post-stat .n { color: white; font-weight: 900; font-size: 1.3rem; }
+  .post-stat .l { color: rgba(255,255,255,0.75); font-size: 10px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 40px 6% 24px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 30px;
+  }
+  .footer-brand h3 {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  .footer-brand p { font-size: 13px; line-height: 1.7; }
+  .footer-col h4 { color: white; font-size: 13px; font-weight: 700; margin-bottom: 14px; letter-spacing: 1px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    font-size: 12px;
+  }
+  .footer-bottom .made-with { color: var(--gold); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 700px) {
+    nav { padding: 12px 4%; }
+    .nav-links { display: none; }
+    .hero { padding: 50px 5% 70px; }
+    .hero-stats { gap: 24px; }
+    .leader-section { grid-template-columns: 1fr; gap: 30px; }
+    .leader-img-wrap { display: none; }
+    .footer-top { grid-template-columns: 1fr; gap: 24px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <div class="emblem">☀️</div>
+    <span>सूर्यपुरा ग्राम विकास पोर्टल <small>Suryapura Village Development Portal</small></span>
+  </div>
+  <div class="nav-links">
+    <a href="#">होम</a>
+    <a href="#">शिक्षा</a>
+    <a href="#">किसान</a>
+    <a href="#">सड़क</a>
+    <a href="#">पंचायत</a>
+    <a href="#" class="nav-btn">संपर्क करें</a>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<section class="hero">
+  <div class="hero-tag">🌅 सूर्यपुरा — उज्जवल भविष्य की ओर</div>
+  <h1>
+    हमारा <span>गांव</span>, हमारी<br>
+    पहचान — <span>डिजिटल</span><br>
+    भारत का हिस्सा
+  </h1>
+  <p>
+    शिक्षा, किसान समृद्धि, पक्की सड़क, सक्रिय पंचायत और<br>
+    डिजिटल पहचान — सूर्यपुरा बन रहा है <strong style="color:var(--gold)">एक आदर्श ग्राम</strong>।
+  </p>
+  <div class="hero-btns">
+    <a href="#" class="btn-primary">🌾 योजनाएं देखें</a>
+    <a href="#" class="btn-outline">📋 पंचायत से जुड़ें</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">4,200+</div><div class="label">ग्राम जनसंख्या</div></div>
+    <div class="stat"><div class="num">18</div><div class="label">सक्रिय योजनाएं</div></div>
+    <div class="stat"><div class="num">87%</div><div class="label">डिजिटल साक्षरता लक्ष्य</div></div>
+    <div class="stat"><div class="num">₹2.4Cr</div><div class="label">विकास बजट 2024-25</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>PM Kisan Samman Nidhi — अभी आवेदन करें</span>
+    <span>नई सड़क निर्माण — वार्ड 3 व 5</span>
+    <span>डिजिटल लाइब्रेरी उद्घाटन 15 अगस्त</span>
+    <span>बेटी बचाओ बेटी पढ़ाओ — छात्रवृत्ति फॉर्म खुले</span>
+    <span>PM Kisan Samman Nidhi — अभी आवेदन करें</span>
+    <span>नई सड़क निर्माण — वार्ड 3 व 5</span>
+    <span>डिजिटल लाइब्रेरी उद्घाटन 15 अगस्त</span>
+    <span>बेटी बचाओ बेटी पढ़ाओ — छात्रवृत्ति फॉर्म खुले</span>
+  </div>
+</div>
+
+<!-- DEVELOPMENT CARDS -->
+<section class="section">
+  <div class="section-header">
+    <div class="eyebrow">विकास के क्षेत्र</div>
+    <h2>सूर्यपुरा के छः स्तम्भ</h2>
+    <div class="underline"></div>
+  </div>
+  <div class="cards-grid">
+    <div class="card green">
+      <div class="card-badge">चालू ✅</div>
+      <span class="card-icon">📚</span>
+      <h3>शिक्षा</h3>
+      <p>प्राथमिक से उच्च माध्यमिक तक डिजिटल कक्षाएं। ई-लाइब्रेरी और स्कॉलरशिप पोर्टल।</p>
+    </div>
+    <div class="card orange">
+      <div class="card-badge">प्रगति में 🔄</div>
+      <span class="card-icon">🌾</span>
+      <h3>किसान समृद्धि</h3>
+      <p>MSP गणना, मौसम अलर्ट, खाद-बीज सब्सिडी और फसल बीमा — सब एक जगह।</p>
+    </div>
+    <div class="card gold">
+      <div class="card-badge">नया 🆕</div>
+      <span class="card-icon">🛣️</span>
+      <h3>सड़क व बुनियादी ढांचा</h3>
+      <p>PM Gram Sadak Yojana के तहत 12km पक्की सड़क — निर्माण जारी।</p>
+    </div>
+    <div class="card earth">
+      <div class="card-badge">चालू ✅</div>
+      <span class="card-icon">🏛️</span>
+      <h3>पंचायत</h3>
+      <p>ऑनलाइन शिकायत, बैठक रिकॉर्ड, ग्राम सभा की लाइव स्ट्रीमिंग।</p>
+    </div>
+    <div class="card green">
+      <div class="card-badge">नया 🆕</div>
+      <span class="card-icon">📱</span>
+      <h3>डिजिटल पहचान</h3>
+      <p>आधार-लिंक्ड राशन कार्ड, DigiLocker, मोबाइल बैंकिंग प्रशिक्षण।</p>
+    </div>
+    <div class="card orange">
+      <div class="card-badge">चालू ✅</div>
+      <span class="card-icon">💧</span>
+      <h3>जल व स्वास्थ्य</h3>
+      <p>जल जीवन मिशन — 98% घरों में नल से जल। मोबाइल स्वास्थ्य कैंप।</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS SECTION -->
+<div class="progress-section">
+  <h3 style="font-family:'Tiro Devanagari Hindi',serif; margin-bottom:28px; font-size:1.2rem;">2024–25 विकास प्रगति</h3>
+  <div>
+    <div class="progress-header"><span>📚 शिक्षा लक्ष्य पूर्ति</span><span>82%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div>
+
+    <div class="progress-header"><span>🌾 किसान योजना पंजीकरण</span><span>74%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:74%"></div></div>
+
+    <div class="progress-header"><span>🛣️ सड़क निर्माण</span><span>61%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:61%"></div></div>
+
+    <div class="progress-header"><span>📱 डिजिटल साक्षरता</span><span>55%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+  </div>
+</div>
+
+<!-- LEADER / AMBASSADOR SECTION -->
+<section class="leader-section">
+  <div class="leader-img-wrap">
+    <div class="leader-avatar">🧑‍🌾</div>
+  </div>
+  <div class="leader-content">
+    <h2>श्री रमेश प्रताप सिंह</h2>
+    <div class="designation">ग्राम विकास दूत • Suryapura Development Ambassador</div>
+    <blockquote>
+      "जिस दिन हमारे गांव का बच्चा लैपटॉप पर पढ़ेगा, हमारा किसान ऑनलाइन अपनी फसल बेचेगा — उस दिन सही मायनों में आज़ादी होगी।"
+    </blockquote>
+    <div class="leader-badges">
+      <span class="badge">🏅 राज्य पुरस्कार विजेता</span>
+      <span class="badge">📊 8 वर्ष सेवा</span>
+      <span class="badge">🌱 ग्रीन विलेज अवार्ड</span>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA POSTS -->
+<section class="social-section">
+  <div class="section-header">
+    <div class="eyebrow">Social Media</div>
+    <h2>ग्राम की आवाज़ — डिजिटल मंच पर</h2>
+    <div class="underline"></div>
+  </div>
+  <div class="social-grid">
+
+    <!-- POST 1 -->
+    <div class="social-post post-1">
+      <div>
+        <div class="post-handle">@SuryapuraGram · Facebook / Instagram</div>
+        <h3>किसान भाई, अब आपकी फसल का सही दाम मिलेगा! 🌾</h3>
+        <p>सूर्यपुरा पोर्टल पर PM Kisan Samman Nidhi के लिए रजिस्टर करें और सीधे अपने खाते में ₹6,000 पाएं। हमारी डिजिटल टीम आपकी मदद के लिए पंचायत भवन में उपलब्ध है।</p>
+      </div>
+      <div class="post-footer">
+        <span class="date">🗓️ जून 2025 | सूर्यपुरा पंचायत</span>
+        <span class="hashtags">#KisanSamman #सूर्यपुरा #DigitalBharat</span>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="social-post post-2">
+      <div>
+        <div class="post-handle" style="color:white; opacity:0.8">@SuryapuraGram · WhatsApp / Instagram</div>
+        <h3>आपकी डिजिटल पहचान, आपकी ताकत! 📱</h3>
+        <p>DigiLocker पर अपने ज़रूरी दस्तावेज़ सेव करें। अब कभी नहीं खोएंगे — आधार, राशन कार्ड, स्कूल सर्टिफिकेट सब फोन में।</p>
+        <div class="post-stat-row">
+          <div class="post-stat"><div class="n">1,240</div><div class="l">नामांकित</div></div>
+          <div class="post-stat"><div class="n">98%</div><div class="l">संतुष्ट</div></div>
+          <div class="post-stat"><div class="n">Free</div><div class="l">बिल्कुल मुफ्त</div></div>
+        </div>
+      </div>
+      <div class="post-footer" style="border-top:1px solid rgba(255,255,255,0.2)">
+        <span class="date" style="color:rgba(255,255,255,0.5)">🗓️ जून 2025</span>
+        <span class="hashtags" style="color:white">#DigiIndia #SuryapuraKiPehchan</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>☀️ सूर्यपुरा ग्राम विकास पोर्टल</h3>
+      <p>ग्राम पंचायत सूर्यपुरा की आधिकारिक डिजिटल उपस्थिति। हमारा लक्ष्य — एक शिक्षित, समृद्ध और डिजिटल गांव।</p>
+    </div>
+    <div class="footer-col">
+      <h4>सेवाएं</h4>
+      <ul>
+        <li><a href="#">शिक्षा पोर्टल</a></li>
+        <li><a href="#">किसान सेवा</a></li>
+        <li><a href="#">योजना सूची</a></li>
+        <li><a href="#">शिकायत दर्ज</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>पंचायत</h4>
+      <ul>
+        <li><a href="#">ग्राम सभा</a></li>
+        <li><a href="#">बजट रिपोर्ट</a></li>
+        <li><a href="#">RTI अनुरोध</a></li>
+        <li><a href="#">संपर्क</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ग्राम पंचायत सूर्यपुरा • सर्वाधिकार सुरक्षित</span>
+    <span class="made-with">Digital India Mission के अंतर्गत 🇮🇳</span>
+  </div>
+</footer>
+
+</body>
+  </html>
